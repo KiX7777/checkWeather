@@ -32,7 +32,7 @@ const getWeather = async function () {
     // const pozicija = await findMe();
     // let lat = pozicija[0];
     // let long = pozicija[1];
-    // const getWeather = await getGeoWeatherData(lat, long);
+    // const getWeather = await getWeatherData(lat, long);
     // console.log(getWeather);
     let name = input.value;
     if (!name) {
@@ -42,14 +42,11 @@ const getWeather = async function () {
     const coords = await getCityCoords(name);
     let [lat, long] = coords;
     console.log(lat, long);
-    const weather = await getGeoWeatherData(lat, long);
+    const weather = await getWeatherData(lat, long);
     console.log(weather);
     let iconId = weather.weather[0].icon;
-    let icon = document.createElement('img');
-    icon.src = `http://openweathermap.org/img/wn/${iconId}@2x.png`;
-    icon.classList = 'icon';
-    document.querySelector('.container').append(icon);
-    document.querySelector('.error').remove();
+    showIcon(iconId);
+    // document.querySelector('.error').remove();
   } catch (err) {
     handleError(err.message);
 
@@ -57,9 +54,16 @@ const getWeather = async function () {
   }
 };
 
+function showIcon(id) {
+  let icon = document.createElement('img');
+  icon.src = `http://openweathermap.org/img/wn/${id}@2x.png`;
+  icon.classList = 'icon';
+  document.querySelector('.container').append(icon);
+}
+
 // const lokacija = findMe();
 
-async function getGeoWeatherData(lat, long) {
+async function getWeatherData(lat, long) {
   try {
     const georeverse = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&lang=hr&appid=689e735828dc8c51f8922560330f00dc&units=metric`
@@ -119,10 +123,7 @@ document.querySelector('.container').addEventListener('click', (e) => {
   }
 });
 
-searchbox.addEventListener('keydown', (e) => {
-  console.log(e.key);
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    getWeather();
-  }
+searchbox.addEventListener('submit', (e) => {
+  e.preventDefault();
+  getWeather();
 });

@@ -5,12 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather app</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/d265174d9a.js"
+      crossorigin="anonymous"
+    ></script>
+
     <script defer src="script.js"></script>
   </head>
   <body>
     <div class="container">
-      <div class="weatherbox">
+      <div class="inputbox">
         <form action="" class="search">
           <input
             type="text"
@@ -38,6 +49,27 @@
           </span>
           <input type="submit" hidden onsubmit="return false" />
         </form>
+      </div>
+      <div class="weatherbox flex">
+        <div class="blur"></div>
+        <div class="left flex">
+          <div class="date-info flex">
+            <h2 class="cityname">Zagreb</h2>
+            <p class="date">23. siječanj 2023.</p>
+          </div>
+          <div class="visual-info flex">
+            <i class="fas fa-snowflake"></i>
+            <p class="current-description">Oblačno</p>
+          </div>
+        </div>
+        <div class="right flex">
+          <p class="current-temp">5<sup>&deg;</sup></p>
+          <div class="min-max flex">
+            <span class="mintemp">0<sup>&deg;</sup></span>
+            <!-- <span class="mintemp">/</span> -->
+            <span class="maxtemp">/ 7<sup>&deg;</sup></span>
+          </div>
+        </div>
       </div>
     </div>
     <!-- <button onclick="showfood()">SHOW FOOD</button> -->
