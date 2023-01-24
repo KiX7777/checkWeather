@@ -10,6 +10,7 @@ let description = document.querySelector('.current-description');
 let currenttemp = document.querySelector('.current-temp');
 let mintemp = document.querySelector('.mintemp');
 let weatherbox = document.querySelector('.weatherbox ');
+let spinner = document.querySelector('.spinner ');
 
 let maxtemp = document.querySelector('.maxtemp');
 let newdate = new Date();
@@ -101,6 +102,10 @@ function showIcon(id) {
   icon.src = `http://openweathermap.org/img/wn/${id}@2x.png`;
   icon.classList = 'weathericon textAnim';
   document.querySelector('.visual-info').append(icon);
+  if (id === '13n') {
+    icon.style.filter =
+      'invert(100%) sepia(53%) saturate(5896%) hue-rotate(-138deg) brightness(165%) contrast(355%)';
+  }
 }
 
 // const lokacija = findMe();
@@ -218,12 +223,14 @@ function renderData(data) {
   date.textContent = today;
   input.value = '';
   animate();
+  spinner.style.display = 'none';
   weatherbox.addEventListener('animationend', (e) => {
     removeAnimation();
   });
 }
 
 async function init() {
+  renderSpinner();
   let SL = await getCityCoords('Slatina, HR');
   let [lat, long, cityName] = SL;
   const weather = await getWeatherData(lat, long);
@@ -248,3 +255,22 @@ function removeAnimation() {
     el.classList.remove('textAnim');
   });
 }
+
+function renderSpinner() {
+  spinner.style.display = 'block';
+}
+
+window.onload = function () {
+  let pageTitle = document.title;
+  let attentionMessage = 'Come Back!';
+
+  document.addEventListener('visibilitychange', function (e) {
+    let isPageActive = !document.hidden;
+
+    if (!isPageActive) {
+      document.title = attentionMessage;
+    } else {
+      document.title = pageTitle;
+    }
+  });
+};
