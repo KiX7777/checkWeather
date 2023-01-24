@@ -99,7 +99,7 @@ const getWeather = async function () {
 
 function showIcon(id) {
   let icon = document.createElement('img');
-  icon.src = `http://openweathermap.org/img/wn/${id}@2x.png`;
+  icon.src = `https://openweathermap.org/img/wn/${id}@2x.png`;
   icon.classList = 'weathericon textAnim';
   document.querySelector('.visual-info').append(icon);
   if (id === '13n') {
@@ -135,7 +135,7 @@ async function getWeatherData(lat, long) {
 async function getCityCoords(city) {
   try {
     const weather = await fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=689e735828dc8c51f8922560330f00dc`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=689e735828dc8c51f8922560330f00dc`
     );
     let data = await weather.json();
     if (data.length <= 0) {
