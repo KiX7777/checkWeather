@@ -51,7 +51,7 @@ form svg {
   cursor: pointer;
   transition: 0.4s all;
 }
-.icon {
+.searchicon {
   width: 40px;
   display: inline-block;
   position: absolute;
@@ -95,7 +95,7 @@ form svg {
   transform: translateX(-10px);
 }
 
-.search.active .icon {
+.search.active .searchicon {
   transform: translateX(165px);
 }
 
@@ -103,8 +103,8 @@ form svg {
   display: flex;
 }
 .weatherbox {
-  width: 500px;
-  height: 300px;
+  width: 700px;
+  height: 400px;
   /* background-color: #333; */
   padding: 20px;
   position: relative;
@@ -122,6 +122,13 @@ form svg {
   background-size: cover;
   filter: blur(2px);
 }
+.weathericon {
+  width: 100px;
+  order: 1;
+}
+.current-description {
+  order: 2;
+}
 
 .left,
 .right,
@@ -135,6 +142,7 @@ form svg {
   flex-direction: column;
   width: 50%;
   align-items: center;
+  letter-spacing: -5px;
   /* text-align: right; */
   /* padding: 20px; */
 }
@@ -146,18 +154,13 @@ form svg {
   justify-content: space-between;
 }
 
-.fas {
-  font-size: 40px;
-  /* text-align: center; */
-  margin-left: 20px;
-}
-
 .visual-info {
   flex-direction: column;
-  gap: 10px;
+  width: fit-content;
+  align-items: center;
 }
 .cityname {
-  font-size: 32px;
+  font-size: 40px;
 }
 
 .date-info {
@@ -165,7 +168,12 @@ form svg {
   gap: 5px;
 }
 .date {
-  font-size: 18px;
+  font-size: 20px;
+}
+
+.mintemp,
+.maxtemp {
+  position: relative;
 }
 
 .current-description {
@@ -174,11 +182,33 @@ form svg {
 
 .current-temp {
   /* font-size: 96px; */
-  font-size: 110px;
-  /* flex: 1; */
-  margin-left: 25%;
+  font-size: 150px;
+  position: relative;
 }
+.current-temp:before {
+  content: '°';
+  font-size: 50px;
+  right: -10px;
+  top: 30px;
+  position: absolute;
+}
+.mintemp:before {
+  content: '°';
+  font-size: 50px;
+  right: -20px;
+  top: -10px;
+  position: absolute;
+}
+.maxtemp:before {
+  content: '°';
+  font-size: 50px;
+  right: -20px;
+  top: -10px;
+  position: absolute;
+}
+
 .min-max {
+  letter-spacing: 5px;
   /* font-size: 32px; */
   font-size: 3em;
   gap: 5px;
