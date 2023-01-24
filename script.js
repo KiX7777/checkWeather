@@ -161,7 +161,9 @@ function handleError(err) {
   error.textContent = `${err}!`;
   error.classList = 'error';
 
-  document.querySelector('.inputbox').appendChild(error);
+  if (document.querySelector('.error')) {
+    return;
+  } else document.querySelector('.inputbox').appendChild(error);
 }
 
 iconBtn.addEventListener('click', (e) => {
