@@ -167,9 +167,14 @@ function handleError(err) {
 iconBtn.addEventListener('click', (e) => {
   e.preventDefault();
   if (searchbox.classList.contains('active')) {
-    getWeather();
-    input.value = '';
-    searchbox.classList.remove('active');
+    if (input.value === '') {
+      searchbox.classList.remove('active');
+      return;
+    } else {
+      getWeather();
+      input.value = '';
+      searchbox.classList.remove('active');
+    }
   } else {
     searchbox.classList.add('active');
     input.focus();
