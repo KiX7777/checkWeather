@@ -316,7 +316,7 @@ p {
 
   .inputbox {
     left: 50%;
-    transform: translateX(-60%);
+    transform: translateX(-50%);
   }
   .left {
     padding: 0;
