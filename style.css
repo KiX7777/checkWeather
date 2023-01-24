@@ -303,3 +303,18 @@ p {
   justify-content: flex-end;
   align-items: center;
 }
+
+@media (max-width: 550px) {
+  .weatherbox {
+    width: 350px;
+    align-self: center;
+  }
+  .container {
+    align-items: inherit;
+  }
+
+  .inputbox {
+    left: 50%;
+    transform: translateX(-60%);
+  }
+}
