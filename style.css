@@ -83,6 +83,7 @@ form svg {
   border-radius: 10px;
   border: none;
   background-color: #efefef;
+
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.3);
 }
 .input:invalid:focus {
@@ -91,7 +92,7 @@ form svg {
 }
 
 .searchicon:hover {
-  background-color: #3f46ba;
+  background-image: linear-gradient(43deg, #c850c0 0%, #ffcc70 100%);
 }
 .searchicon:hover svg {
   filter: invert();
