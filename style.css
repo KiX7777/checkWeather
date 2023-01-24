@@ -33,7 +33,7 @@ form {
 }
 
 input[type='text'] {
-  font-size: 18px;
+  font-size: 14px;
   width: 40px;
   height: 40px;
   padding: 10px;
@@ -41,6 +41,10 @@ input[type='text'] {
   border-radius: 10px;
   outline: none;
   border: none;
+  background-color: #efefef;
+}
+.inputbox {
+  border-radius: 20px;
 }
 
 .form {
@@ -63,13 +67,20 @@ form svg {
   cursor: pointer;
   border-radius: 10px;
   border: none;
-  background-color: white;
+  background-color: #efefef;
+  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.3);
 }
 .input:invalid:focus {
   outline: none;
   color: red;
 }
 
+.searchicon:hover {
+  background-color: #3f46ba;
+}
+.searchicon:hover svg {
+  filter: invert();
+}
 .error {
   font-size: 12px;
   background-color: black;
@@ -88,6 +99,7 @@ form svg {
 .inputbox {
   position: absolute;
   top: 10px;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
 }
 
 .search.active .input {
@@ -97,6 +109,7 @@ form svg {
 
 .search.active .searchicon {
   transform: translateX(165px);
+  box-shadow: none;
 }
 
 .flex {
@@ -192,23 +205,29 @@ form svg {
 }
 .cityname {
   font-size: 40px;
+  filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.718));
 }
 
 .date-info {
   flex-direction: column;
+  filter: drop-shadow(3px 4px 5px rgba(0, 0, 0, 0.718));
+
   gap: 5px;
 }
 .date {
   font-size: 20px;
+  filter: drop-shadow(3px 2px 2px rgba(0, 0, 0, 0.718));
 }
 
 .mintemp,
 .maxtemp {
   position: relative;
+  filter: drop-shadow(3px 4px 2px rgba(0, 0, 0, 0.718));
 }
 
 .current-description {
   font-size: 24px;
+  filter: drop-shadow(3px 4px 2px rgba(0, 0, 0, 0.718));
 }
 @keyframes text {
   from {
@@ -228,6 +247,7 @@ form svg {
 .current-temp {
   /* font-size: 96px; */
   font-size: 150px;
+  filter: drop-shadow(3px 4px 5px rgba(0, 0, 0, 0.718));
   position: relative;
 }
 .current-temp:before {
