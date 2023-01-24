@@ -183,6 +183,10 @@ form svg {
   border-radius: 20px;
   filter: blur(2px);
 }
+
+p {
+  visibility: hidden;
+}
 .weathericon {
   width: 100px;
   order: 1;

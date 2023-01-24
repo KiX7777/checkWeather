@@ -243,6 +243,9 @@ async function init() {
   renderData(weather);
   showIcon(weather.icon);
   document.querySelector('.blur').style.backgroundImage = snowpic;
+  document.querySelectorAll('p').forEach((el) => {
+    el.style.visibility = 'visible';
+  });
 }
 
 init();
