@@ -171,8 +171,8 @@ iconBtn.addEventListener('click', (e) => {
   }
 });
 
-document.querySelector('.container').addEventListener('click', (e) => {
-  if (e.target.classList.contains('container')) {
+document.querySelector('.opacity').addEventListener('click', (e) => {
+  if (e.target.classList.contains('opacity')) {
     searchbox.classList.remove('active');
   }
 });
