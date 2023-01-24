@@ -9,6 +9,8 @@ let icon = document.querySelector('.icon');
 let description = document.querySelector('.current-description');
 let currenttemp = document.querySelector('.current-temp');
 let mintemp = document.querySelector('.mintemp');
+let weatherbox = document.querySelector('.weatherbox ');
+
 let maxtemp = document.querySelector('.maxtemp');
 let newdate = new Date();
 let options = {
@@ -73,13 +75,14 @@ const getWeather = async function () {
     let [lat, long, cityName] = coords;
     let errorMsg = document.querySelector('.error');
     let wIcon = document.querySelector('.weathericon');
-
     const weather = await getWeatherData(lat, long);
     cityname.textContent = cityName + `, ${weather.country}`;
     console.log(weather);
     renderData(weather);
     showIcon(weather.icon);
+
     backgroundPic(weather.weatherID);
+
     if (errorMsg) {
       errorMsg.remove();
     }
@@ -96,7 +99,7 @@ const getWeather = async function () {
 function showIcon(id) {
   let icon = document.createElement('img');
   icon.src = `http://openweathermap.org/img/wn/${id}@2x.png`;
-  icon.classList = 'weathericon';
+  icon.classList = 'weathericon textAnim';
   document.querySelector('.visual-info').append(icon);
 }
 
@@ -214,6 +217,10 @@ function renderData(data) {
   description.textContent = capitalizeDesc;
   date.textContent = today;
   input.value = '';
+  animate();
+  weatherbox.addEventListener('animationend', (e) => {
+    removeAnimation();
+  });
 }
 
 async function init() {
@@ -227,3 +234,17 @@ async function init() {
 }
 
 init();
+
+function animate() {
+  document.querySelector('.blur').classList.add('blurAnim');
+  document.querySelectorAll('p').forEach((el) => {
+    el.classList.add('textAnim');
+  });
+}
+function removeAnimation() {
+  document.querySelector('.blur').classList.remove('blurAnim');
+  document.querySelector('.weathericon').classList.remove('textAnim');
+  document.querySelectorAll('p').forEach((el) => {
+    el.classList.remove('textAnim');
+  });
+}
