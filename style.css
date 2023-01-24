@@ -317,7 +317,9 @@ p {
     left: 50%;
     transform: translateX(-60%);
   }
-
+  .left {
+    padding: 0;
+  }
   .weathericon {
     width: 70px;
   }
