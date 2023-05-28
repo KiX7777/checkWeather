@@ -194,7 +194,7 @@ form svg {
   top: 0;
   left: 0;
   /* background-color: white; */
-  background-image: url('https://images.unsplash.com/photo-1516431883659-655d41c09bf9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80');
+  /* background-image: url('https://images.unsplash.com/photo-1516431883659-655d41c09bf9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80'); */
   opacity: 0.4;
   background-position: center;
   background-size: cover;
@@ -322,7 +322,7 @@ p:not(.error) {
   align-items: center;
 }
 
-@media (max-width: 550px) {
+@media (max-width: 768px) {
   .weatherbox {
     width: 350px;
     align-self: center;
@@ -340,5 +340,22 @@ p:not(.error) {
   }
   .weathericon {
     width: 70px;
+  }
+  .current-temp {
+    font-size: 110px;
+  }
+  .min-max {
+    font-size: 2em;
+  }
+  .min-max > :before,
+  .current-temp:before {
+    font-size: 40px;
+  }
+
+  .weathericon {
+    width: 80px;
+  }
+  .cityname {
+    font-size: 32px;
   }
 }

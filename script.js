@@ -34,36 +34,23 @@ let thunderstormpic =
   'url(https://images.unsplash.com/photo-1537036017783-64573b29adb9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=725&q=80)'
 
 //----------------------------------------------------------------------------------------------------------------------
-const getPosition = function () {
-  //funkcija koja vraća promise, a resolved value je position iz navigatora (ako se dobije)
-  return new Promise(function (resolve, reject) {
-    navigator.geolocation.getCurrentPosition(resolve, reject)
-  })
-}
 
-const findMe = async function () {
-  try {
-    //getPosition je promise i on se sad awaita i rezultat (position) se pohranjuje u varijablu
-    const position = await getPosition()
-
-    //uzimanje koordinata i pohranjivanje u varijable
-    let { latitude, longitude } = position.coords
-    //ova funkcija će kao rezultat vratiti koordinate
-    return [latitude, longitude]
-  } catch (err) {
+async function getPos() {
+  let koordinate = []
+  function successGeo(pos) {
+    const { latitude: lat, longitude: long } = pos.coords
+    koordinate.push(lat, long)
+  }
+  function errorGeo(err) {
     console.log(err)
   }
+  await navigator.geolocation.getCurrentPosition(successGeo, errorGeo)
+  return koordinate
 }
 
 const getWeather = async function (city) {
   //IIFE (automatski se izvodi)
   try {
-    //uzima se rezultat findMe = koordinate
-    // const pozicija = await findMe();
-    // let lat = pozicija[0];
-    // let long = pozicija[1];
-    // const getWeather = await getWeatherData(lat, long);
-    // console.log(getWeather);
     let name = input.value.trimStart()
     if (!name) {
       throw new Error('Polje ne može biti prazno')
@@ -115,8 +102,9 @@ async function getWeatherData(lat, long) {
     const georeverse = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&lang=hr&appid=689e735828dc8c51f8922560330f00dc&units=metric`
     )
+
+    //get city name by coords
     let data = await georeverse.json()
-    console.log(data)
 
     let dataObj = {
       currentTemp: data.main.temp,
@@ -126,6 +114,7 @@ async function getWeatherData(lat, long) {
       weatherID: data.weather[0].id.toString(),
       icon: data.weather[0].icon,
       country: data.sys.country,
+      cityName: data.name,
     }
     return dataObj
   } catch (err) {
@@ -151,10 +140,6 @@ async function getCityCoords(city) {
     console.log(err)
   }
 }
-
-// fetch(
-//   'http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid={689e735828dc8c51f8922560330f00dc}'
-// );
 
 function handleError(err) {
   let error = document.createElement('p')
@@ -238,9 +223,13 @@ function renderData(data) {
 
 async function init() {
   renderSpinner()
-  let SL = await getCityCoords('Zagreb, HR')
-  let [lat, long, cityName] = SL
-  const weather = await getWeatherData(lat, long)
+  //getting user's coords
+  const data = await getPos()
+  //getting current weather
+  const weather = await getWeatherData(data[0], data[1])
+  console.log(weather)
+  const { cityName } = weather
+
   cityname.textContent = cityName + `, ${weather.country}`
   renderData(weather)
   showIcon(weather.icon)
@@ -250,8 +239,6 @@ async function init() {
     el.style.visibility = 'visible'
   })
 }
-
-init()
 
 function animate() {
   document.querySelector('.blur').classList.add('blurAnim')
@@ -285,3 +272,5 @@ window.onload = function () {
     }
   })
 }
+
+init()
