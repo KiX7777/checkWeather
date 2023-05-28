@@ -225,10 +225,20 @@ async function init() {
   renderSpinner()
   //getting user's coords
   const data = await getPos()
+  console.log(data)
+  let cityName, weather
+  if (data.length === 0) {
+    console.log('No access')
+    let ZG = await getCityCoords('Zagreb, HR')
+    let [lat, long] = ZG
+    cityName = ZG[2]
+    weather = await getWeatherData(lat, long)
+  } else {
+    weather = await getWeatherData(data[0], data[1])
+    console.log(weather)
+    cityName = weather.cityName
+  }
   //getting current weather
-  const weather = await getWeatherData(data[0], data[1])
-  console.log(weather)
-  const { cityName } = weather
 
   cityname.textContent = cityName + `, ${weather.country}`
   renderData(weather)
