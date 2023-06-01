@@ -64,7 +64,7 @@ const getWeather = async function (city) {
     let errorMsg = document.querySelector('.error')
     let wIcon = document.querySelector('.weathericon')
     const weather = await getWeatherData(lat, long)
-    cityname.textContent = cityName + `, ${weather.country}`
+    cityname.textContent = cityName + `, ${getFlagEmoji(weather.country)}`
     console.log(weather)
     renderData(weather)
     showIcon(weather.icon)
@@ -240,7 +240,7 @@ async function init() {
   }
   //getting current weather
 
-  cityname.textContent = cityName + `, ${weather.country}`
+  cityname.textContent = cityName + `, ${getFlagEmoji(weather.country)}`
   renderData(weather)
   showIcon(weather.icon)
   backgroundPic(weather.weatherID)
@@ -284,3 +284,11 @@ window.onload = function () {
 }
 
 init()
+
+function getFlagEmoji(countryCode) {
+  const codePoints = countryCode
+    .toUpperCase()
+    .split('')
+    .map((char) => 127397 + char.charCodeAt())
+  return String.fromCodePoint(...codePoints)
+}
